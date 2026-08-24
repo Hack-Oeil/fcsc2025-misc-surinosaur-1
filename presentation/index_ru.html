@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Page Title-->
+    <title>Hack-Oeil - Les CTFs de Cyrhades</title>
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" title="Favicon" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="./assets/js/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Vérifie si la fenêtre est dans une iframe
+            if (window.self !== window.top) {
+                document.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', (event) => {
+                        const a = event.target.closest('a[href^="http"]');
+                        if (a) {
+                            event.preventDefault();
+                            window.parent.postMessage({
+                                type: "open-external",
+                                url: a.href
+                            }, "*");
+                        }
+                    });
+                });
+            }
+            // Active la coloration syntaxique :
+            if (window.hljs) {
+                hljs.highlightAll();
+            } else {
+                console.error("Highlight.js non chargé !");
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!--Main Content Area-->
+        <main id="content">
+            <!--Ctf-->
+            <section class="ctf scrollto">
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Челлендж #571</h3>
+                            <h2 class="section-title">Surinausor (Dewaste)</h2>
+                            <p>
+<em>FCSC — это CTF в формате Jeopardy, но вот задание для тренировки в режиме Attack-Defense.</em> <em>Флаги, которыми обмениваются симулированные команды, являются вымышленными и не зависят от FCSC.</em> <em>Ваша цель — отфильтровать сетевой трафик: как только вы справитесь, вам будет выдан флаг для подтверждения прохождения задания FCSC.</em>
+<br /><br />
+Вы играете в <a href="https://2023.faustctf.net/information/attackdefense-for-beginners/">CTF в режиме Attack/Defense</a>, но случилась катастрофа! Организаторы предоставили сервисы только в виде бинарных файлов или на экзотических языках, которые вы не знаете, поэтому просто пропатчить их невозможно. Вы решаете кардинально изменить стратегию: вместо исправления уязвимостей вы развертываете <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D0%BF%D1%80%D0%B5%D0%B4%D0%BE%D1%82%D0%B2%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D1%8F_%D0%B2%D1%82%D0%BE%D1%80%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9">систему предотвращения вторжений</a> (IPS) на машине, где размещены ваши сервисы (на <em>vulnbox</em>).
+<br /><br />
+В качестве образца мы предоставляем вам сетевой дамп (файл <code>dewaste.pcap</code>), сделанный в тот момент, когда вы с ужасом обнаружили на табло, что одной из команд удалось украсть ваши флаги. Флаги в этой атаке-защите соответствуют регулярному выражению <code>ECSC_[A-Za-z0-9\/+]{32}</code>. Ваша цель — написать правила Suricata, чтобы <strong>заблокировать только полезную нагрузку (payload), использованную в наблюдаемой атаке (или атаках)</strong>. Нельзя блокировать легитимный трафик, который, помимо прочего, позволяет отправлять флаги и проверять их наличие в сервисе. Написав правила, вы можете подключиться к <code>nc localhost 4000</code>, чтобы протестировать их на новом трафике. Мы выдадим вам флаг FCSC, как только сервис будет должным образом защищен (нелегитимный трафик заблокирован, легитимный трафик не изменен).
+<br /><br />
+Для вдохновения вы можете скачать примеры правил блокировки здесь: <a href="https://rules.emergingthreats.net/OPEN_download_instructions.html">https://rules.emergingthreats.net/OPEN_download_instructions.html</a>. Также рекомендуем ознакомиться с документацией Suricata: <a href="https://docs.suricata.io/en/suricata-7.0.6/rules/index.html">https://docs.suricata.io/en/suricata-7.0.6/rules/index.html</a>.
+<br /><br />
+Примечание: <em>Рассматриваемый сервис Attack-Defense — это Dewaste, изначально разработанный для ECSC 2022. Для решения этой задачи читать исходный код сервиса не требуется.</em>
+                            </p>
+                            <h4>Файл для изучения:</h4>
+                            <p>../files/dewaste.pcap.xz</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>FCSC 2025</h3>
+                            <h2 class="section-title">Hackropole</h2>
+                            <p class="section-subtitle">
+                                Официальная ссылка:
+                                <a target="_blank" href="https://hackropole.fr/fr/challenges/misc/fcsc2025-misc-surinosaur-1/">https://hackropole.fr/fr/challenges/misc/fcsc2025-misc-surinosaur-1/</a>
+                                <br />
+                                Автор: erdnaxe
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Обучение</h3>
+                            <h2 class="section-title">Документация и видео</h2>
+                            <p class="section-subtitle">
+                                На данный момент документация отсутствует
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Помощь</h3>
+                            <h2 class="section-title">Советы и подсказки</h2>
+                            <p class="section-subtitle">
+                                <a target="_blank"
+                                    href="https://discord.com/channels/1175764392307077120/1175764601716092948">Ветка в Discord</a>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <!--End of Ctf-->
+        </main>
+        <!--End Main Content Area-->
+
+        <a id="scrollUp" href="#wrapper" style="position: fixed; z-index: 1000;"
+            aria-label="Прокрутить в начало страницы" title="Вернуться наверх"></a>
+    </div>
+</body>
+
+</html>

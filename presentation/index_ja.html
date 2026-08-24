@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Page Title-->
+    <title>Hack-Oeil - Les CTFs de Cyrhades</title>
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" title="Favicon" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="./assets/js/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Vérifie si la fenêtre est dans une iframe
+            if (window.self !== window.top) {
+                document.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', (event) => {
+                        const a = event.target.closest('a[href^="http"]');
+                        if (a) {
+                            event.preventDefault();
+                            window.parent.postMessage({
+                                type: "open-external",
+                                url: a.href
+                            }, "*");
+                        }
+                    });
+                });
+            }
+            // Active la coloration syntaxique :
+            if (window.hljs) {
+                hljs.highlightAll();
+            } else {
+                console.error("Highlight.js non chargé !");
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!--Main Content Area-->
+        <main id="content">
+            <!--Ctf-->
+            <section class="ctf scrollto">
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>チャレンジ #571</h3>
+                            <h2 class="section-title">Surinausor (Dewaste)</h2>
+                            <p>
+<em>FCSCはJeopardy形式のCTFですが、ここではAttack-Defense（攻防戦）モードの練習ができる課題を用意しました。</em> <em>シミュレートされたチーム間で交換されるフラグは架空のものであり、FCSC本体とは独立しています。</em> <em>あなたの目的はネットワークトラフィックをフィルタリングすることです。成功すると、FCSCの課題を検証するためのフラグが提供されます。</em>
+<br /><br />
+あなたは<a href="https://2023.faustctf.net/information/attackdefense-for-beginners/">Attack/Defense形式のCTF</a>に参加していますが、大惨事が発生しました！主催者はバイナリ形式や馴染みのない未知の言語で書かれたサービスしか提供しておらず、簡単にパッチを適用することができません。そこで、戦略を大幅に変更することにしました。脆弱性を直接修正する代わりに、サービスをホストしているマシン（<em>vulnbox</em>）に<a href="https://ja.wikipedia.org/wiki/%E4%BE%B5%E5%85%A5%E9%98%B2%E6%AD%A2%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">不正侵入防止システム</a>（IPS）を導入することにしました。
+<br /><br />
+参考として、スコアボードで他のチームにフラグを奪われたことを知り愕然とした瞬間のネットワークキャプチャ（ファイル <code>dewaste.pcap</code>）を提供します。このAttack-Defenseのフラグは正規表現 <code>ECSC_[A-Za-z0-9\/+]{32}</code> に従います。あなたの目標は、<strong>観測された攻撃で使用されたペイロードのみをブロックする</strong>Suricataルールを作成することです。フラグの配置やサービス内のフラグ存在確認などを行う正当なトラフィックはブロックしてはいけません。ルールを作成したら、<code>nc localhost 4000</code> に接続して新しいトラフィックでテストできます。サービスが適切に保護されると（不正トラフィックをブロックし、正当なトラフィックはそのまま通過）、FCSCのフラグが提供されます。
+<br /><br />
+参考となるブロックルールの例はここからダウンロードできます: <a href="https://rules.emergingthreats.net/OPEN_download_instructions.html">https://rules.emergingthreats.net/OPEN_download_instructions.html</a>。また、Suricataのドキュメントを読むこともお勧めします: <a href="https://docs.suricata.io/en/suricata-7.0.6/rules/index.html">https://docs.suricata.io/en/suricata-7.0.6/rules/index.html</a>。
+<br /><br />
+注: <em>対象となるAttack-Defenseサービスは、もともとECSC 2022向けに開発されたDewasteです。この課題を解決するためにサービスのソースコードを読む必要はありません。</em>
+                            </p>
+                            <h4>調査するファイル:</h4>
+                            <p>../files/dewaste.pcap.xz</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>FCSC 2025</h3>
+                            <h2 class="section-title">Hackropole</h2>
+                            <p class="section-subtitle">
+                                公式リンク:
+                                <a target="_blank" href="https://hackropole.fr/fr/challenges/misc/fcsc2025-misc-surinosaur-1/">https://hackropole.fr/fr/challenges/misc/fcsc2025-misc-surinosaur-1/</a>
+                                <br />
+                                作成者: erdnaxe
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>学習</h3>
+                            <h2 class="section-title">ドキュメントと動画</h2>
+                            <p class="section-subtitle">
+                                現在ドキュメントはありません
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>ヘルプ</h3>
+                            <h2 class="section-title">ヒントとアドバイス</h2>
+                            <p class="section-subtitle">
+                                <a target="_blank"
+                                    href="https://discord.com/channels/1175764392307077120/1175764601716092948">Discordスレッド</a>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <!--End of Ctf-->
+        </main>
+        <!--End Main Content Area-->
+
+        <a id="scrollUp" href="#wrapper" style="position: fixed; z-index: 1000;"
+            aria-label="ページ上部へ戻る" title="トップへ戻る"></a>
+    </div>
+</body>
+
+</html>

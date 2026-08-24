@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Page Title-->
+    <title>Hack-Oeil - Les CTFs de Cyrhades</title>
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" title="Favicon" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="./assets/js/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Vérifie si la fenêtre est dans une iframe
+            if (window.self !== window.top) {
+                document.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', (event) => {
+                        const a = event.target.closest('a[href^="http"]');
+                        if (a) {
+                            event.preventDefault();
+                            window.parent.postMessage({
+                                type: "open-external",
+                                url: a.href
+                            }, "*");
+                        }
+                    });
+                });
+            }
+            // Active la coloration syntaxique :
+            if (window.hljs) {
+                hljs.highlightAll();
+            } else {
+                console.error("Highlight.js non chargé !");
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!--Main Content Area-->
+        <main id="content">
+            <!--Ctf-->
+            <section class="ctf scrollto">
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>챌린지 #571</h3>
+                            <h2 class="section-title">Surinausor (Dewaste)</h2>
+                            <p>
+<em>FCSC는 Jeopardy 형식의 CTF이지만, 이번 문제는 Attack-Defense(공방전) 모드를 연습할 수 있도록 준비되었습니다.</em> <em>시뮬레이션된 팀 간에 교환되는 플래그는 가상이며 FCSC와 무관합니다.</em> <em>여러분의 목표는 네트워크 트래픽을 필터링하는 것입니다. 성공하면 FCSC 문제를 인증할 수 있는 플래그가 제공됩니다.</em>
+<br /><br />
+여러분은 <a href="https://2023.faustctf.net/information/attackdefense-for-beginners/">Attack/Defense 방식의 CTF</a>를 플레이하고 있지만, 비상이 걸렸습니다! 주최 측이 바이너리 형태나 잘 모르는 생소한 언어로 작성된 서비스만 제공했기 때문에 간단하게 패치할 수가 없습니다. 여러분은 전략을 대대적으로 변경하기로 결정했습니다. 취약점을 직접 수정하는 대신 서비스를 호스팅하는 머신(<em>vulnbox</em>)에 <a href="https://ko.wikipedia.org/wiki/%EC%BD%B4%ED%93%A8%ED%84%B0_%EB%B3%B4%EC%95%88#%EC%B9%A8%EC%9E%85_%EB%B0%A9%EC%A7%80_%EC%8B%9C%EC%8A%A4%ED%85%9C">침입 방지 시스템</a>(IPS)을 구축하는 것입니다.
+<br /><br />
+스코어보드에서 어느 팀이 여러분의 플래그를 탈취한 것을 공포 속에서 발견했을 때 캡처한 네트워크 트래픽(파일 <code>dewaste.pcap</code>)을 참고 자료로 제공합니다. 이 공방전의 플래그는 정규표현식 <code>ECSC_[A-Za-z0-9\/+]{32}</code> 형태를 따릅니다. 여러분의 목표는 <strong>관찰된 공격에 사용된 페이로드만 차단하는</strong> Suricata 규칙을 작성하는 것입니다. 플래그를 등록하거나 서비스 내 플래그 존재 여부를 확인하는 등의 정상 트래픽을 차단해서는 안 됩니다. 규칙을 작성한 후 <code>nc localhost 4000</code>에 접속하여 새로운 트래픽에 대해 테스트할 수 있습니다. 서비스가 올바르게 보호되면(비정상 트래픽 차단, 정상 트래픽 수정 없음) FCSC 플래그를 받게 됩니다.
+<br /><br />
+참고할 수 있는 차단 규칙 예제는 여기에서 다운로드할 수 있습니다: <a href="https://rules.emergingthreats.net/OPEN_download_instructions.html">https://rules.emergingthreats.net/OPEN_download_instructions.html</a>. 또한 Suricata 설명서를 읽어보는 것을 권장합니다: <a href="https://docs.suricata.io/en/suricata-7.0.6/rules/index.html">https://docs.suricata.io/en/suricata-7.0.6/rules/index.html</a>.
+<br /><br />
+참고: <em>해당 Attack-Defense 서비스는 원래 ECSC 2022용으로 개발된 Dewaste입니다. 이 문제를 해결하기 위해 이 서비스의 소스 코드를 읽을 필요는 없습니다.</em>
+                            </p>
+                            <h4>분석할 파일:</h4>
+                            <p>../files/dewaste.pcap.xz</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>FCSC 2025</h3>
+                            <h2 class="section-title">Hackropole</h2>
+                            <p class="section-subtitle">
+                                공식 링크:
+                                <a target="_blank" href="https://hackropole.fr/fr/challenges/misc/fcsc2025-misc-surinosaur-1/">https://hackropole.fr/fr/challenges/misc/fcsc2025-misc-surinosaur-1/</a>
+                                <br />
+                                작성자: erdnaxe
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>학습</h3>
+                            <h2 class="section-title">문서 및 동영상</h2>
+                            <p class="section-subtitle">
+                                현재 등록된 문서가 없습니다
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>도움말</h3>
+                            <h2 class="section-title">조언 및 힌트</h2>
+                            <p class="section-subtitle">
+                                <a target="_blank"
+                                    href="https://discord.com/channels/1175764392307077120/1175764601716092948">Discord 스레드</a>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <!--End of Ctf-->
+        </main>
+        <!--End Main Content Area-->
+
+        <a id="scrollUp" href="#wrapper" style="position: fixed; z-index: 1000;"
+            aria-label="페이지 맨 위로 이동" title="맨 위로"></a>
+    </div>
+</body>
+
+</html>
